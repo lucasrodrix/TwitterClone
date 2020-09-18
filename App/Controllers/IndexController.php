@@ -6,16 +6,17 @@
 
     class IndexController extends Action{
         public function index(){
+            $this->view->login = isset($_GET['login']) ? $_GET['login'] : '';
             $this->render('index');
         }
         
         public function inscreverse(){
+            $this->view->erroCadastro = false;
             $this->view->usuario = array(
                 'nome' => '',
                 'email' => '',
                 'senha' => '',
             );            
-            $this->view->erroCadastro = false;
             $this->render('inscreverse');
         }
         
