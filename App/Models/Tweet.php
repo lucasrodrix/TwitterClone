@@ -28,7 +28,12 @@
 		}
 
 		public function getAll(){
-			$query = "select tweets.id, tweets.id_usuario, tweets.tweet, DATE_FORMAT(tweets.data, '%d/%m/%Y %H:%i') as data, usuarios.nome from tweets left join usuarios on (tweets.id_usuario = usuarios.id) where tweets.id_usuario = :id_usuario order by tweets.data desc";
+			$query = "select tweets.id, tweets.id_usuario, tweets.tweet, DATE_FORMAT(tweets.data, '%d/%m/%Y %H:%i') as data, usuarios.nome 
+			from tweets 
+			left join usuarios on (tweets.id_usuario = usuarios.id) 
+			where tweets.id_usuario = :id_usuario
+			or tweets.id_usuario in (select id_usuario_seguindo from usuarios_seguidores where id_usuario = :id_usuario)
+			order by tweets.data desc";
 			$stmt = $this->db->prepare($query);
 			$stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
 			$stmt->execute();
