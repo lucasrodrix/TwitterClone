@@ -27,25 +27,25 @@
 					
 					<div class="row mt-2 mb-2">
 						<div class="col mb-2">
-							<span class="perfilPainelNome"><?= $_SESSION['nome'] ?></span>
+							<span class="perfilPainelNome"><?= $this->view->infoUser['nome']?></span>
 						</div>
 					</div>
 
 					<div class="row mb-2">
 
-						<div class="col">
+					<div class="col">
 							<span class="perfilPainelItem">Tweets</span><br />
-							<span class="perfilPainelItemValor">0</span>
+							<span class="perfilPainelItemValor"><?= $this->view->totalTweets['total_tweets']?></span>
 						</div>
 
 						<div class="col">
 							<span class="perfilPainelItem">Seguindo</span><br />
-							<span class="perfilPainelItemValor">0</span>
+							<span class="perfilPainelItemValor"><?= $this->view->totalFollows['total_follows']?></span>
 						</div>
 
 						<div class="col">
 							<span class="perfilPainelItem">Seguidores</span><br />
-							<span class="perfilPainelItemValor">0</span>
+							<span class="perfilPainelItemValor"><?= $this->view->totalFollowers['total_followers']?></span>
 						</div>
 
 					</div>

@@ -8,12 +8,21 @@
         public function timeline(){
             $this->validaAutenticacao();
             
-            $tweet = Container::getModel('Tweet');
-            
+            $tweet = Container::getModel('Tweet');            
             $tweet->__set('id_usuario', $_SESSION['id']);
+            
             $tweets = $tweet->getAll();
 
             $this->view->tweets = $tweets;
+            
+            $usuario = Container::getModel('Usuario');
+            $usuario->__set('id', $_SESSION['id']);
+
+            $this->view->infoUser = $usuario->getInfoUser();
+            $this->view->totalTweets = $usuario->getTotalTweets();
+            $this->view->totalFollows = $usuario->getTotalFollows();
+            $this->view->totalFollowers = $usuario->getTotalFollowers();
+           
             $this->render('timeline');
         }
 
@@ -47,8 +56,16 @@
                 $usuario->__set('nome', $pesquisarPor);
                 $usuarios = $usuario->getAll();
             }
-
             $this->view->usuarios = $usuarios;
+
+            $usuario = Container::getModel('Usuario');
+            $usuario->__set('id', $_SESSION['id']);
+
+            $this->view->infoUser = $usuario->getInfoUser();
+            $this->view->totalTweets = $usuario->getTotalTweets();
+            $this->view->totalFollows = $usuario->getTotalFollows();
+            $this->view->totalFollowers = $usuario->getTotalFollowers();
+
             $this->render('quemSeguir');
         }
         public function acao(){
